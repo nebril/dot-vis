@@ -73,7 +73,9 @@ function DirectedAcyclicGraph() {
     var height = d3.functor("100%");
     var edgeid = function(d) { return d.source.id + d.target.id; }
     var nodeid = function(d) { return d.id; }
-    var nodename = function(d) { return d.report["Agent"] ? d.report["Agent"].substr(-25) : ""; }
+    var nodename = function(d) { 
+		return d.report["Agent"][0] ? d.report["Agent"][0].substr(-25) : ""; 
+	}
     var getnodes = function(d) { return d.getVisibleNodes(); }
     var getedges = function(d) { return d.getVisibleLinks(); }
     var bbox = function(d) {
