@@ -1,0 +1,27 @@
+[{
+    "id": "small.json",
+    "reports": [
+        {
+            "EventID": 1, 
+			"ParentEventID": [], 
+            "Class": [
+                "edu.berkeley.xtrace.XTraceContext"
+            ],
+            "Agent": [
+                "MRAppMaster"
+            ],
+            "Edge": []
+        },
+        {
+            "EventID": 2, 
+			"ParentEventID": [1], 
+            "Class": [
+                "edu.berkeley.xtrace.XTraceContext"
+            ],
+            "Agent": [
+                "MRAppMaster2"
+            ],
+            "Edge": []
+        }
+    ]
+}]
