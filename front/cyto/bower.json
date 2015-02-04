@@ -1,0 +1,25 @@
+{
+  "name": "y",
+  "version": "2.3.8",
+  "homepage": "https://github.com/nebril/dot-vis",
+  "authors": [
+    "Maciej Kwiek <mkwiek@mirantis.com>"
+  ],
+  "description": "y",
+  "main": "y",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "cytoscape": "~2.3.8",
+    "dagre": "~0.7.1",
+    "webcola": "~3.0.1",
+    "jquery": "~2.1.3"
+  }
+}
