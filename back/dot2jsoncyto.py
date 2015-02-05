@@ -29,7 +29,7 @@ for node in graph.get_node_list():
                 "percentage": float(percentage.strip('()%')),
                 "percentage2": float(percentage2.strip('()%')),
                 "callCount": times,
-                "label": "{0}\n{1}\n{2}".format(function, percentage, times),
+                "label": "{0}, {1}, {2}".format(function, percentage, times),
             },
             "position": {
                 "x": 0,
@@ -52,7 +52,7 @@ for edge in graph.get_edge_list():
             "target": edge.get_destination(),
             "percentage": float(percentage.strip('()%')),
             "callCount" : int(times),
-            "label": "{0}\n{1}x".format(percentage, times),
+            "label": "{0}, {1}x".format(percentage, times),
 
         }
     })
