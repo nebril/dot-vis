@@ -1,0 +1,35 @@
+{
+  "name": "cytoscape-cxtmenu",
+  "version": "2.0.0",
+  "description": "A context menu for Cytoscape.js",
+  "main": "cytoscape-cxtmenu.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cytoscape/cytoscape.js-cxtmenu.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "keywords": [
+    "cytoscape",
+    "cytoscape.js",
+    "cytoscapejs",
+    "extension"
+  ],
+  "license": "LGPL3+",
+  "homepage": "https://github.com/cytoscape/cytoscape.js-cxtmenu",
+  "_release": "2.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.0.0",
+    "commit": "706aac9e34e335d5be4a73e4af408653df70fb32"
+  },
+  "_source": "git://github.com/cytoscape/cytoscape.js-cxtmenu.git",
+  "_target": "~2.0.0",
+  "_originalSource": "cytoscape-cxtmenu",
+  "_direct": true
+}

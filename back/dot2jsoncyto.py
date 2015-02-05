@@ -3,6 +3,7 @@
 import argparse
 import os
 import json
+import sys
 
 import pydot
 
@@ -25,9 +26,10 @@ for node in graph.get_node_list():
             "data": {
                 "id": str(int(node.get_name())),
                 "funcName": function,
-                "percentage": percentage,
-                "percentage2": percentage2,
+                "percentage": float(percentage.strip('()%')),
+                "percentage2": float(percentage2.strip('()%')),
                 "callCount": times,
+                "label": "{0}\n{1}\n{2}".format(function, percentage, times),
             },
             "position": {
                 "x": 0,
@@ -36,14 +38,22 @@ for node in graph.get_node_list():
         })
         
     except (ValueError, AttributeError) as e:
+        sys.stderr.write("Skipped {0}".format(node.get_name()));
         pass
 
 for edge in graph.get_edge_list():
+    percentage, times = tuple(
+        edge.get_label().strip('"').split('\xc3')[0].split('\\n')
+    )
     edges.append({
         "data": {
             "id": 'e' + str(int(edge.get_source())) + '_' +  str(int(edge.get_destination())),
             "source": edge.get_source(),
             "target": edge.get_destination(),
+            "percentage": float(percentage.strip('()%')),
+            "callCount" : int(times),
+            "label": "{0}\n{1}x".format(percentage, times),
+
         }
     })
 
