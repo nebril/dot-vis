@@ -33,7 +33,7 @@ var initiate = function() {
 		headless: true,
 	});
 
-	var cy = cytoscape({
+	var cyOptions = {
 		container: document.getElementById('thegraph'),
 		ready: function(){ console.log('cy ready') },
 		style: cytoscape.stylesheet()
@@ -67,8 +67,9 @@ var initiate = function() {
 		layout: layout,
 		hideEdgesOnViewport: false,
 		hideLabelsOnViewport: true,
-	});
+	};
 
+	var cy = cytoscape(cyOptions);
 
 	var r = new XMLHttpRequest();
 	r.open("GET", "custom.json", true);
@@ -108,12 +109,6 @@ var initiate = function() {
 		}
 	};
 
-	var rebuildGraph = function(funcName) {
-		cy.add(allcy.nodes("[funcName *= '" + initFunction + "']").closedNeighborhood());
-		cy.layout(layout);
-		cy.load( cy.elements('*').jsons() );
-		rebindClick();
-	};
 
 	var hideSubgraph = function() {
 		cy.remove(this.successors());
@@ -149,6 +144,15 @@ var initiate = function() {
 		itemTextShadowColor: 'black', // the text shadow colour of the command's content
 		zIndex: 9999 // the z-index of the ui div
 	};
+
+	rebuildGraph = function(funcName) {
+		cy.remove(cy.elements());
+		cy.add(allcy.nodes("[funcName *= '" + funcName + "']").closedNeighborhood());
+		cy.layout(layout);
+		cy.load( cy.elements('*').jsons() );
+		rebindClick();
+	};
+
 	cy.cxtmenu(cxtMenuDefaults);
 
 	r.send();

@@ -22543,7 +22543,8 @@ var cytoscape;
       d = d.run(g);
 
       d.eachNode(function(id, n) {
-        cy.getElementById(id).scratch().dagre = n;
+		var dagreElement = cy.getElementById(id);
+        if(dagreElement.length > 0) dagreElement.scratch().dagre = n;
       });
 
       var dagreBB;
