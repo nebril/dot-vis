@@ -35,7 +35,6 @@ var initiate = function() {
 
 	var cyOptions = {
 		container: document.getElementById('thegraph'),
-		ready: function(){ console.log('cy ready') },
 		style: cytoscape.stylesheet()
 			.selector('node')
 			.css({
@@ -163,9 +162,7 @@ var initiate = function() {
 	rebuildGraph = function(funcName) {
 		cy.remove(cy.elements());
 		cy.add(allcy.nodes("[funcName *= '" + funcName + "']").closedNeighborhood());
-		cy.layout(layout);
-		cy.load( cy.elements('*').jsons() );
-		rebindClick();
+		redrawGraph();
 	};
 
 	cy.cxtmenu(cxtMenuDefaults);
