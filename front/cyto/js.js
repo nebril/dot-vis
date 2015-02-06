@@ -6,7 +6,7 @@ var initiate = function() {
 		name: 'dagre',
 
 		// dagre algo options, uses default value on undefined
-		nodeSep: 500, // the separation between adjacent nodes in the same rank
+		nodeSep: 700, // the separation between adjacent nodes in the same rank
 		edgeSep: undefined, // the separation between adjacent edges in the same rank
 		rankSep: undefined, // the separation between adjacent nodes in the same rank
 		rankDir: 'TP', // 'TB' for top to bottom flow, 'LR' for left to right
@@ -91,6 +91,12 @@ var initiate = function() {
 		cy.nodes().on('click', onClick);
 	};
 
+	var redrawGraph = function(node) {
+		cy.layout(layout);
+		cy.load( cy.elements('*').jsons(), function() { cy.center(node)} );
+		window.setTimeout(rebindClick, 500); //because it enters recursion when not timouted	
+	};
+	
 	var onClick = function() {
 		var node = this;
 
@@ -102,22 +108,27 @@ var initiate = function() {
 			var added = original.neighborhood()
 
 			cy.add(added);
-			cy.layout(layout);
-			cy.load( cy.elements('*').jsons(), function() { cy.center(node)} );
-
-			window.setTimeout(rebindClick, 500);	
+			redrawGraph(node);
 		}
 	};
 
 
 	var hideSubgraph = function() {
 		cy.remove(this.successors());
+		redrawGraph(this);
 	};
 
 	var hideSubgraphAndNode = function() {
 		cy.remove(this.successors());
 		cy.remove(this);
+		redrawGraph(this);
 	};
+
+	var hideSiblings = function() {
+		var siblings = this.incomers().outgoers().filter('node[id != "' + this.id() + '"]');
+		hideSubgraphAndNode.apply(siblings);
+		redrawGraph(this);
+	}
 
 	var cxtMenuDefaults = {
 		menuRadius: 100, // the radius of the circular menu in pixels
@@ -130,6 +141,10 @@ var initiate = function() {
 			{
 				content: 'Hide subgraph',
 				select: hideSubgraph, 
+			},
+			{
+				content: 'Hide all siblings',
+				select: hideSiblings,
 			},
 		], 
 		fillColor: 'rgba(0, 0, 0, 0.75)', // the background colour of the menu
