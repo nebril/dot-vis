@@ -7,9 +7,8 @@ import pydot
 
 
 class Dot2JSONParser(object):
-    def __init__(self, sourcefile, targetfile):
+    def __init__(self, sourcefile):
         self.source = sourcefile
-        self.targetfile = targetfile
 
     def parse(self):
         self.graph = pydot.graph_from_dot_file(self.source)
